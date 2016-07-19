@@ -1,0 +1,1276 @@
+@import "base/markup-variables";
+@import "base/markup-mixins";
+@import "base/base-reset";
+@import "base/fonts-style";
+@import "base/wp-reset";
+@import "base/carousel-styles";
+
+body{
+	@include breakpoint($mobile){
+		line-height:1.5;
+	}
+}
+#wrapper{
+	overflow: hidden;
+	position: relative;
+}
+.container,
+.container_sm{
+	@extend %clearfix;
+	margin: 0 auto;
+	padding: 0 20px;
+	max-width: 1034px;
+	&_sm{
+		max-width:780px;
+	}
+	@include breakpoint($mobile){
+		padding:0 10px;
+	}
+}
+#header{
+	padding: 38px 0 32px;
+	position: relative;
+	box-shadow:0 0 9px 0 rgba(0,0,0,0.1);
+	@include breakpoint($mobile){
+		padding:10px;
+	}
+	.logo{
+		float:left;
+	}
+}
+.anim-holder {
+	position: absolute;
+	bottom: 12px;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	@include breakpoint($mobile){
+		display:none;
+	}
+}
+.hrs2 {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	display: block;
+	width: 100px;
+	height: 65px;
+	margin-left: -70px;
+	overflow:hidden;
+}
+.hrs2 img {
+	vertical-align: top;
+	width: auto !important;
+	max-width: none;
+}
+.logo{
+	img{
+		display:block;
+	}
+}
+#nav{
+	@extend %listreset;
+	float: right;
+	padding:10px 19px 0 0;
+	@include breakpoint($mobile){
+		opacity:0;
+		visibility:hidden;
+		position: absolute;
+		z-index:10;
+		top:100%;
+		margin:10px 0 0;
+		left:-20px;
+		right:-20px;
+		padding:0;
+		text-align:center;
+		border:solid $purple;
+		border-width:1px 0;
+		box-shadow:0 5px 10px -5px rgba(0,0,0,0.5);
+		background:#fff;
+	}
+	li{
+		list-style: none;
+		list-style-position: outside;
+	}
+	a{
+		color:black;
+		text-decoration: none;
+	}
+	>li{
+		float: left;
+		position: relative;
+		margin: 0 44px;
+		@include breakpoint($mobile){
+			float:none;
+			margin:0;
+			&:hover>a{
+				color:$purple;
+			}
+		}
+		&.active>a:before{
+			content:"";
+			clear:both;
+			position: absolute;
+			top:100%;
+			margin:11px 0 0;
+			left:0;
+			width:100%;
+			height:3px;
+			background:$purple;
+			@include breakpoint($mobile){
+				display:none;
+			}
+		}
+	}
+	>li>a{
+		color: black;
+		text-decoration: none;
+		font:14px/17px $museo-font;
+		display:block;
+		position: relative;
+		padding:0 22px 0 0;
+		@include breakpoint($mobile){
+			padding:7px 25px;
+			font-size:18px;	
+			line-height:22px;
+		}
+		&:not(:only-child){
+			z-index: 10;
+			&:after{
+				content: "\e902";
+				font-family: 'icomoon';
+				font-size: 10px;
+				color: $gray;
+				position: absolute;
+				top:2px;
+				right:0;
+				@include breakpoint($mobile){
+					right:10px;
+					top:8px;
+				}
+			}
+		}
+	}
+	.drop{
+		position: absolute;
+		z-index: 9;
+		left:50%;
+		opacity: 0;
+		visibility:hidden;
+		top:-30px;
+		transform: translateX(-50%);
+		width: 170px;
+		transition: opacity 0.4s;
+		text-align:left;
+		@include breakpoint($mobile){
+			position: relative;
+			display:none;
+			left: auto;
+			top: auto;
+			transform:none;
+			width:auto;
+			text-align:center;
+			background:lighten($purple, 33%);
+		}
+		&>ul{
+			padding: 75px 22px 9px;
+			@extend %listreset;
+			background:white;
+			position: relative;
+			@include breakpoint($mobile){
+				padding:0;
+				background:none;
+			}
+		}
+		&:before{
+			content: "";
+			clear: both;
+			position: absolute;
+			top: -40px;
+			left: 0;
+			width: 100%;
+			perspective: 500px;
+			transform: perspective(1000px) rotateX(45deg) scale(0.75, 1);
+			box-shadow: 0 20px 64px 0 #000;
+			bottom:0;
+			@include breakpoint($mobile){
+				display:none;
+			}
+		}
+		li{
+			border-bottom: 1px solid $light-gray;
+			@include breakpoint($mobile){
+				border-color: #fff;
+			}
+			&:last-child{
+				border: none;
+			}
+		}
+		a{
+			display:block;
+			padding:4px 0 5px 36px;
+			font-size:13px;
+			@include breakpoint($mobile){
+				padding:8px;
+				line-height:17px;
+				font-size:14px;
+			}
+		}
+		.hover a{
+			color: $purple;
+		}
+	}
+	.hover{
+		&>a:not(:only-child):after{
+			color: $orange;
+		}
+		.drop{
+			opacity: 1;
+			visibility:visible;
+			@include breakpoint($mobile){
+				display:block;
+			}
+		}
+	}
+}
+
+.menu{
+	@extend %clearfix;
+	position: relative;
+	@include breakpoint($mobile){
+
+	}
+	z-index:10;
+	.opener{
+		width:35px;
+		height:31px;
+		border-radius:5px;
+		border:2px solid $purple;
+		background:$light-gray;
+		float:right;
+		display:none;
+		position: relative;
+		margin:3px 0 0;
+		&:hover{
+			background:#fff;
+		}
+		&:before,
+		&:after,
+		span{
+			content:"";
+			clear:both;
+			position: absolute;
+			top:5px;
+			left:5px;
+			right:5px;
+			height:3px;
+			background:$purple;
+		}
+		&:after{
+			top:19px;
+		}
+		span{
+			top:12px;
+		}
+		@include breakpoint($mobile){
+			display:block;
+		}
+	}
+}
+.nav-active{
+	#nav{
+		opacity:1;
+		visibility:visible;
+	}
+	.opener{
+		background:#fff;
+	}
+}
+
+.visual-top{
+	position: relative;
+	height:440px;
+	background-size:cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	&.index{
+		height:auto;
+	}
+	@include breakpoint($mobile){
+		height:150px;
+	}
+}
+#main{
+	padding:50px 0 119px;
+	@include breakpoint($mobile){
+		padding:30px 0;
+	}
+}
+.events-section{
+	@extend %clearfix;
+	margin:0 0 65px;
+	@include breakpoint($mobile){
+		margin:0 0 40px;
+	}
+	.info-row .date-info{
+		font-size:18px;
+	}
+}
+.events-box{
+	float:left;
+	width:50%;
+	padding:0 0 0 22px;
+	@include breakpoint($mobile){
+		float:none;
+		width:auto;
+		padding:0;
+		margin:0 0 40px;
+	}
+	&:first-child{
+		padding:0 22px 0 0;
+		@include breakpoint($mobile){
+			padding:0;
+		}
+	}
+	.post-box{
+		padding:9px 0 0;
+	}
+}
+.shadow-title{
+	color:$purple;
+	padding:18px 19px 18px;
+	box-shadow:0 5px 20px 0 rgba(0,0,0,0.06);
+	margin:0 0 29px;
+	line-height:22px;
+	@include breakpoint($mobile){
+		padding:10px;
+	}
+	h2{
+		font-size:18px;
+		font-family:$museo-font;
+		line-height:22px;
+		font-weight:normal;
+		margin:0 13px 0 0;
+		color:$purple;
+		display:inline-block;
+		letter-spacing: 0.03em;
+	}
+	.show-more{
+		font-size:12px;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+.info-row{
+	display: table;
+	width:100%;
+	line-height:21px;
+	@include breakpoint($mobile){
+		line-height:18px;
+		margin:0 0 10px;
+	}
+	.date-info,
+	.event-info,
+	.add-info{
+		display: table-cell;
+		vertical-align: top;
+		text-align:left;
+	}
+	.date-info{
+		padding:0 14px 0 0;
+		width:74px;
+		text-align:right;
+		font-size:24px;
+		line-height: initial;
+		font-family: $museo-font-bold;
+		color:black;
+		letter-spacing: 0.03em;
+		@include breakpoint($mobile){
+			font-size:16px;
+			width:63px;
+		}
+	}
+	a.event-info{
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+	.date{
+		font-size:24px;
+		@include breakpoint($mobile){
+			font-size:16px;
+		}
+	}
+	.title{
+		display:block;
+		font-family: $museo-font-bold;
+		color:#000;
+	}
+	.add-info{
+		color:$dark-green;
+		font-size:11px;
+		line-height:13px;
+		padding:4px 0 0 5px;
+		text-align:right;
+		width:90px;
+		@include breakpoint($mobile){
+			width:auto;
+		}
+	}
+	.description{
+		display:block;
+	}
+}
+.event-list{
+	@extend %listreset;
+	li{
+		@extend %listreset;
+		margin:0 0 49px;
+		@include breakpoint($mobile){
+			margin:0 0 20px;
+		}
+	}
+}
+.post{
+	font-size:12px;
+	line-height:21px;
+	margin:0 0 26px;
+	@extend %clearfix;
+	p{
+		margin:0 0 14px;
+	}
+	&>a{
+		text-decoration: none;
+	}
+	@include breakpoint($mobile){
+		line-height:18px;
+		padding:0;
+	}
+	.post-date{
+		display:block;
+		color:$dark-green;
+		font-size:11px;
+		line-height:17px;
+		margin:-21px 0 4px;
+		@include breakpoint($mobile){
+			margin:0 0 4px;
+		}
+	}
+	.post-title{
+		display:block;
+		font-size:14px;
+		font-family: $museo-font-bold;
+		margin:0 0 10px;
+		color:#000;
+		text-decoration: none;
+		a{
+			color:#000;
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+		@include breakpoint($mobile){
+			margin:0 0 5px;
+		}
+	}
+	img{
+		float:left;
+		width:220px;
+		margin:0 23px 5px 0;
+		@include breakpoint($tablet){
+			width:170px;
+		}
+		@include breakpoint($mobile){
+			width:100px;
+			margin:0 15px 3px 0;
+		}
+	}
+	.text-box{
+		padding:16px 0 0 0;
+		@include breakpoint($mobile){
+			padding:0;
+		}
+	}
+}
+.labs-block{
+	overflow:hidden;
+	display: table;
+	width:100%;
+	color:#000;
+	font-size:16px;
+	line-height:24px;
+	overflow:hidden;
+	min-height:178px;
+	@include breakpoint($mobile){
+		font-size:14px;
+		line-height:20px;
+	}
+	.img-box{
+		position: relative;
+		z-index:2;
+		vertical-align: top;
+		padding:14px 24px;
+		background:url(../images/img-03.jpg) no-repeat 50% 50% / cover;
+		width:52.5%;
+		@include breakpoint($mobile){
+			min-height:70px;
+			padding:14px 32px;
+		}
+	}
+	h2{
+		font-size:26px;
+		@include breakpoint($mobile){
+			margin:0;
+			font-size:22px;
+			text-shadow:1px 1px 0 #fff, 1px -1px 0 #fff;
+		}
+	}
+	.text-box{
+		padding:16px 30px 12px 82px;
+		background:$green;
+		position: relative;
+		@include breakpoint($mobile){
+			padding:10px 20px 5px;
+		}
+		&:before,
+		&:after{
+			content:"";
+			clear:both;
+			position: absolute;
+			top:0;
+			right:0;
+			left:31px;
+			height:50%;
+			background:$green;
+			z-index:2;
+			transform: skewX(28deg);
+			transform-origin:bottom;
+			box-shadow:-30px 0 0 0 #fff;
+			@include breakpoint($mobile){
+				display:none;
+			}
+		}
+		&:after{
+			bottom:0;
+			top:auto;
+			transform: skewX(-28deg);
+			transform-origin:top;
+		}
+	}
+	.img-box,
+	.text-box{
+		vertical-align: middle;
+		display: table-cell;
+		@include breakpoint($mobile){
+			display:block;
+			width:auto;
+		}
+	}
+}
+.labs-list{
+	@extend %listreset;
+	position: relative;
+	z-index:3;
+	li{
+		padding:0 0 0 13px;
+		margin:0 0 6px;
+		position: relative;
+		list-style-type: none;
+		list-style-position: outside;
+		&:before{
+			content:"";
+			clear:both;
+			position: absolute;
+			top:13px;
+			left:0;
+			width:5px;
+			height:2px;
+			background:#000;
+			@include breakpoint($mobile){
+				top:9px;
+				height:1px;
+			}
+		}
+		a{
+			color:#000;
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.visual-section{
+	@extend %clearfix;
+	margin:0 0 82px;
+	@include breakpoint($mobile){
+		margin:0 0 40px;
+	}
+	.box{
+		float:left;
+		width:50%;
+		padding:0 0 0 22px;
+		@include breakpoint($mobile){
+			float:none;
+			width:auto;
+			padding:0;
+			margin:0 0 20px;
+		}
+		&:first-child{
+			padding:0 22px 0 0;
+			@include breakpoint($mobile){
+				padding:0;
+			}
+		}
+	}
+	img{
+		vertical-align: top;
+		width:100%;
+		height:auto;
+	}
+	.video-box,
+	.fade-carousel{
+		margin:0 0 23px;
+		@include breakpoint($mobile){
+			margin:0 0 10px;
+		}
+	}
+}
+
+.bordered-box.networks{
+	border-color: $yellow;
+	padding:5px;
+	display: table;
+	width:100%;
+	table-layout: fixed;
+	margin:0;
+	.item{
+		display: table-cell;
+		vertical-align: middle;
+		@include breakpoint($mobile){
+			display:block;
+			text-align:center;
+			padding:5px;
+		}
+		&:first-child{
+			padding-left:41px;
+			@include breakpoint($tablet){
+				padding-left:15px;
+			}
+			@include breakpoint($mobile){
+				padding:5px;
+			}
+		}
+		&:last-child{
+			padding-right: 62px;
+			@include breakpoint($tablet){
+				padding-right: 15px;
+			}
+			@include breakpoint($mobile){
+				padding:5px;
+			}
+		}
+	}
+	h2{
+		font-size:26px;
+		margin:0;
+		@include breakpoint($mobile){
+			font-size:19px;
+		}
+	}
+	address{
+		font-style:normal;
+		margin:0;
+		line-height:26px;
+		float:right;
+		@include breakpoint($mobile){
+			font-size:12px;
+			line-height:18px;
+		}
+		a{
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+		@include breakpoint($mobile){
+			float:none;
+		}
+	}
+	.social-network{
+		@extend %listreset;
+		text-align:center;
+		font-size:0;
+		li{
+			display:inline-block;
+			font-size:14px;
+			list-style-type: none;
+			list-style-position: outside;
+			margin:0 16px;
+			@include breakpoint($tablet){
+				margin:0 10px;
+			}
+		}
+		a{
+			display: table-cell;
+			vertical-align: middle;
+			text-decoration: none;
+			padding:10px;
+			height:106px;
+			width:75px;
+			color:#000;
+			text-align:center;
+			background:$yellow;
+			transform:skew(-18deg);
+			@include breakpoint($mobile){
+				height:45px;
+				width:45px;
+			}
+		}
+		i{
+			font-size:23px;
+			position: relative;
+			display:block;
+			transform:skew(18deg);
+		}
+	}
+}
+
+/* article styles */
+.blog-post{
+	padding:14px 0 0;
+	@include breakpoint($mobile){
+		padding:0;
+	}
+}
+.post-heading{
+	overflow:hidden;
+	color:#767676;
+	line-height:22px;
+	margin:0 0 26px;
+	@include breakpoint($mobile){
+		margin:0 0 10px;
+	}
+	.date{
+		float:right;
+		margin:0 0 0 15px;
+		font-size:12px;
+	}
+	.author-info{
+		display:block;
+	}
+	.name{
+		color:#000;
+	}
+}
+.narrow-holder{
+	padding:0 102px;
+	&_sm{
+		max-width:780px;
+		margin:0 auto;
+	}
+	@include breakpoint($mobile){
+		padding:0;
+	}
+}
+.marked-box{
+	color:#000;
+	font-size:18px;
+	line-height:29px;
+	position: relative;
+	margin:0 0 34px;
+	font-family: $museo-font-bold;
+	@include breakpoint($mobile){
+		font-size:16px;
+		line-height:22px;
+		margin:0 0 20px;
+	}
+	&:before{
+		content:"";
+		clear:both;
+		position: absolute;
+		top:13px;
+		left:-59px;
+		height:4px;
+		width:50px;
+		background:#000;
+		@include breakpoint($mobile){
+			display:none;
+		}
+	}
+}
+.gallery-block{
+	padding:33px 0 0;
+	margin:0 0 58px;
+	@include breakpoint($mobile){
+		padding:0;
+		margin:0 0 20px;
+	}
+}
+.posts-section{
+	.shadow-title{
+		margin:0 0 52px;
+	}
+	.post{
+		margin:0 0 46px;
+	}
+}
+
+/* blog styles */
+.heading{
+	margin:0 0 12px;
+	h1{
+		display:inline-block;
+		margin:0 20px 10px 0;
+		vertical-align: middle;
+	}
+	.search-form{
+		display:inline-block;
+		position:relative;
+		vertical-align: middle;
+		margin:0 0 10px;
+		&:before{
+			font-family: icomoon;
+			content:"\e907";
+			font-size:17px;
+			line-height:1;
+			clear:both;
+			position: absolute;
+			top:8px;
+			right:22px;
+			color:$purple;
+		}
+		input[type='search']{
+			box-sizing:border-box;
+			border-radius:17px;
+			font-size:12px;
+			padding:7px 38px 9px 17px;
+			width:200px;
+		}
+	}
+}
+.post-list{
+	@extend %listreset;
+	.post{
+		margin:0;
+	}
+	li{
+		list-style-type: none;
+		list-style-position: outside;
+		width:50%;
+		float:left;
+		padding:0 20px 0 0;
+		margin:0 0 46px;
+		@include breakpoint($mobile){
+			float:none;
+			width:auto;
+			padding:0;
+			margin:0 0 25px;
+		}
+		&:nth-child(even){
+			padding:0 0 0 20px;
+			@include breakpoint($mobile){
+				padding:0;
+			}
+		}
+	}
+}
+
+/* event-styles */
+.event-section{
+	line-height:24px;
+	.text-title{
+		text-transform: uppercase;
+		font-weight:700;
+		color:#000;
+		display:block;
+	}
+	p{
+		margin:0 0 24px;
+	}
+}
+.text-block{
+	margin:0 0 82px;
+	@include breakpoint($mobile){
+		margin:0 0 40px;
+	}
+}
+.bordered-box.phone-box{
+	border-color: $yellow;
+	font-size:21px;
+	line-height:34px;
+	text-align:center;
+	color:#000;
+	padding:24px 22px 20px;
+	max-width:536px;
+	margin:0 auto 83px;
+	@include breakpoint($mobile){
+		font-size:16px;
+		line-height:24px;
+		padding:5px;
+		margin:0 0 40px;
+	}
+	a{
+		font-size:26px;
+		color:#000;
+		text-decoration: none;
+		@include breakpoint($mobile){
+			font-size:20px;
+		}
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+.heading-block{
+	display: table;
+	width:100%;
+	font-size:14px;
+	line-height:22px;
+	margin:0 0 72px;
+	@include breakpoint($mobile){
+		margin:0 0 20px;
+	}
+	.img-box{
+		display: table-cell;
+		vertical-align: top;
+		width:57.3%;
+		padding:0 50px 0 0;
+		@include breakpoint($mobile){
+			display:block;
+			width:auto;
+			margin:0 0 20px;
+			padding:0;
+		}
+		img{
+			vertical-align: top;
+		}
+	}
+	.heading-box{
+		display: table-cell;
+		vertical-align: middle;
+		padding:70px 0 113px 25px;
+		position: relative;
+		@include breakpoint($mobile){
+			display:block;
+			padding:0;
+		}
+	}
+	.category{
+		position: absolute;
+		top:45px;
+		left:25px;
+		@include breakpoint($mobile){
+			position: relative;
+			display:block;
+			top:auto;
+			margin:0 0 5px;
+		}
+	}
+	h1{
+		margin:0 0 10px;
+		line-height:36px;
+		@include breakpoint($mobile){
+			line-height:28px;
+		}
+	}
+	.info{
+		position: absolute;
+		bottom:42px;
+		left:25px;
+		color:#000;
+		@include breakpoint($mobile){
+			position: relative;
+			bottom: auto;
+		}
+		&.marked{
+			&:before{
+				top:3px;
+				left:-25px;
+			}
+		}
+	}
+	.time{
+		display:block;
+	}
+}
+
+/* camps styles */
+.camps{
+	color:#000;
+	line-height:22px;
+	margin:0 0 134px;
+	@include breakpoint($mobile){
+		line-height:20px;
+		margin:0 0 40px;
+	}
+	h2{
+		font-size:30px;
+		margin:0 0 61px;
+		@include breakpoint($tablet){
+			font-size:24px;
+			margin:0 0 20px;
+		}
+		@include breakpoint($mobile){
+			font-size:20px;
+			margin:0 0 10px;
+			br{
+				display:none;
+			}
+		}
+	}
+	.item{
+		overflow:hidden;
+		border-top:3px dashed $green;
+		padding:56px 0 0;
+		margin:0 0 62px;
+		&:first-child{
+			border:0;
+			padding-top:0;
+		}
+		@include breakpoint($mobile){
+			margin:0 0 25px;
+			padding:35px 0 0;
+		}
+	}
+	img{
+		float:left;
+		width:47.7%;
+		@include breakpoint($mobile){
+			float:none;
+			width:auto;
+			vertical-align:top;
+			margin:0 0 10px;
+		}
+	}
+	.holder{
+		overflow:hidden;
+		padding:30px 0 0 85px;
+		@include breakpoint($tablet){
+			padding:10px 0 0 30px;
+		}
+		@include breakpoint($mobile){
+			padding:0;
+		}
+	}
+	.add-info{
+		float:right;
+		width:105px;
+		color:$dark-green;
+		font-size:11px;
+		line-height:18px;
+		@include breakpoint($tablet){
+			width:auto;
+		}
+		@include breakpoint($mobile){
+			float:none;
+			display:block;
+			text-align:right;
+		}
+	}
+	.event-info{
+		overflow:hidden;
+		padding:0 10px 0 35px;
+		@include breakpoint($tablet){
+			padding:0 10px 0 25px;
+		}
+	}
+	.info-holder,
+	.info{
+		position: relative;
+		max-width:200px;
+		&.marked{
+			&:before{
+				top:3px;
+				left:-35px;
+				@include breakpoint($tablet){
+					left:-25px;
+				}
+			}	
+		}
+		&.man{
+			&:before{
+				font-size:22px;
+				top:-2px;
+				left:-40px;
+				@include breakpoint($tablet){
+					left:-30px;
+				}
+			}
+		}
+	}
+	.subtitle{
+		color:$base-text-color;
+		display:block;
+	}
+	.info{
+		display:block;
+		margin:0 0 27px;
+		&:last-child{
+			margin:0;
+		}
+		@include breakpoint($tablet){
+			margin:0 0 15px;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.bordered-box{
+	border:3px dashed $green;
+	padding:22px;
+	margin:0 0 90px;
+	@include breakpoint($mobile){
+		padding:10px;
+		margin:0 0 40px;
+	}
+}
+.bg-style{
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+}
+.bg-01{
+	background-image:url(../images/bg-img-3.jpg);
+}
+.bg-02{
+	background-image:url(../images/bg-img-4.jpg);
+}
+.bg-03{
+	background-image:url(../images/bg-img-05.jpg);
+}
+.bg-04{
+	background-image:url(../images/bg-img-06.jpg);
+}
+
+/* footer-styles */
+#footer{
+	background:$light-gray;
+	padding:51px 20px 25px;
+	color:#000;
+	@include breakpoint($mobile){
+		padding:20px 0;
+		text-align:center;
+	}
+	.logo{
+		float:left;
+		width:68px;
+		height:37px;
+		margin:0 0 48px;
+		@include breakpoint($mobile){
+			margin:0 auto 20px;
+			float:none;
+		}
+	}
+	address{
+		font-style:normal;
+		font-size:12px;
+		line-height:18px;
+		float:left;
+		clear: left;
+		@include breakpoint($mobile){
+			float:none;
+			margin:0;
+		}
+	}
+	a{
+		color:#000;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+.footer-nav{
+	float:right;
+	@include breakpoint($mobile){
+		float:none;
+		margin:0 0 15px;
+	}
+	.box{
+		float:left;
+		width:201px;
+		padding-right: 10px;
+		@include breakpoint($tablet){
+			width:150px;
+		}
+		@include breakpoint($mobile){
+			float:none;
+			width:auto;
+			padding:0;
+		}
+		&:last-child{
+			width:76px;
+			padding-right: 0;
+			@include breakpoint($mobile){
+				width:auto;
+			}
+		}
+	}
+	.nav{
+		@extend %listreset;
+		li{
+			list-style-type: none;
+			list-style-position: outside;
+			margin:0 0 1px;
+		}
+	}
+}
+.marked{
+	position: relative;
+	&:before{
+		content:"\e901";
+		clear:both;
+		position: absolute;
+		top:0;
+		left:0;
+		font-size:16px;
+		line-height:1;
+		color:$purple;
+		font-family: icomoon;
+	}
+	&.man{
+		&:before{
+			content: '\e905';
+		}
+	}
+}
+
+#__bs_notify__{
+	display:none !important;
+}

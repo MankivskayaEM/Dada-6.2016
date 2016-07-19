@@ -1,0 +1,208 @@
+/* fade carousel styles */
+.carousel-holder{
+	position: relative;
+}
+.fade-carousel{
+	position: relative;
+	.slide {
+		position: absolute;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		img{
+			width: 100%;
+			height: auto;
+			vertical-align: top;
+		}
+		.active {z-index: 2;}
+	}
+	.not-enough-slides .btn-prev,
+	.not-enough-slides .btn-next {visibility: hidden;}
+	.btn-prev,
+	.btn-next{
+		position: absolute;
+		z-index:2;
+		top:50%;
+		left:-10px;
+		transform:translateY(-50%);
+		width:45px;
+		height:45px;
+		background:#fff;
+		border-radius:50%;
+		box-shadow:0 10px 30px 0 rgba(0,0,0,0.2);
+		text-decoration: none;
+		font-size:17px;
+		@include breakpoint($mobile){
+			width:35px;
+			height:35px;
+			left:5px;
+		}
+		&:hover:before,
+		&:hover:after{
+			color:darken(#c0c0bd, 10%);
+		}
+		&:before{
+			content:"\e903";
+			line-height:1;
+			clear:both;
+			position: absolute;
+			color:#c0c0bd;
+			top:50%;
+			left:50%;
+			transform:translate(-50%, -50%);
+			font-family: icomoon;
+		}
+	}
+	.btn-next{
+		left: auto;
+		right:-10px;
+		@include breakpoint($mobile){
+			right:5px;
+		}
+		&:before{
+			content:"\e904";
+		}
+	}
+	.pagination{
+		text-align:center;
+		line-height:0;
+		ul{
+			@extend %listreset;
+			display:inline-block;
+			vertical-align: top;
+			li{
+				float:left;
+				margin:0 7px;
+				list-style:none;
+				list-style-position: outside;
+				&.active a{
+					background:$purple;
+					box-shadow:0 0 0 1px $purple;
+				}
+			}
+			a{
+				text-decoration: none;
+				text-indent:-9999px;
+				overflow:hidden;
+				display:block;
+				width:6px;
+				height:6px;
+				border-radius:50%;
+				background:$gray;
+			}
+		}
+	}
+}
+.visual-top{
+	.pagination{
+		width:255px;
+		position: absolute;
+		z-index:2;
+		right:103px;
+		bottom:57px;
+		@include breakpoint($mobile){
+			position: relative;
+			width:100%;
+			left: auto;
+			right: auto;
+			bottom: auto;
+		}
+	}
+	.slide{
+		background-size:cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		@include breakpoint($mobile){
+			padding:30px;
+		}
+	}
+	.slideset{
+		@include breakpoint($mobile){
+			margin:0 0 15px;
+		}
+	}
+	.text-holder{
+		position: absolute;
+		width: 255px;
+		top: 43px;
+		right: 103px;
+		bottom:42px;
+		background:#fff url(../images/bg-img-2.jpg) no-repeat 100% 0;
+		color:black;
+		line-height:22px;
+		padding:33px 24px 30px;
+		@include breakpoint($mobile){
+			position: relative;
+			right: auto;
+			top:auto;
+			bottom: auto;
+			width:auto;
+			padding:20px;
+		}
+		.title{
+			display:block;
+			left: 25px;
+			font-size:18px;
+			color:$purple;
+			@include breakpoint($mobile){
+				margin:0 0 10px;
+			}
+		}
+		.time-info{
+			display:block;
+			&.marked{
+				&:before{
+					top:3px;
+					left:-24px;
+					@include breakpoint($mobile){
+						left:-20px;
+					}
+				}
+			}
+		}
+		.time,
+		.date{
+			display:block;
+		}
+		.title-box{
+			height:245px;
+			overflow:hidden;
+			margin:0 0 2px;
+			@include breakpoint($mobile){
+				height:auto;
+			}
+		}
+		h2{
+			font-size:18px;
+			line-height:30px;
+			display: table-cell;
+			height:245px;
+			vertical-align: middle;
+			padding:28px 0 0;
+			@include breakpoint($mobile){
+				height:auto;
+				display:block;
+				padding:0;
+				font-size:16px;
+				line-height:21px;
+			}
+		}
+	}
+}
+.carousel-holder{
+	position: relative;
+	margin:0 0 37px;
+	@include breakpoint($mobile){
+		margin:0 0 20px;
+	}
+}
+
+@media (min-width:768px){
+	.visual-top{
+		.fade-carousel,
+		.slide{
+			height:500px !important;
+		}
+	}
+}
