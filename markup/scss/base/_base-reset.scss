@@ -30,7 +30,10 @@ summary {
 	display: block;
 }
 
-img {border-style: none;}
+img {
+	border-style: none;
+	vertical-align: top;
+}
 
 a {
 	text-decoration: none;
